@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Bot Ares · fotky k inzerci za minutu</title>
+<link rel="icon" href="logo.svg">
+<style>
+:root{
+  --paper:#f5f4ef; --card:#ffffff; --ink:#101018; --mut:#5d5b6b; --line:#dcdad2;
+  --acc:#5236ff; --acc-soft:#ebe7ff; --night:#0b0a1a;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:-apple-system,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+  --r:28px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px;border-radius:6px}
+em.s{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.02em;color:var(--acc)}
+
+/* floating nav */
+nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:6px;padding:7px 7px 7px 16px;background:#ffffffd9;backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px;box-shadow:0 8px 30px #1010180f;max-width:calc(100vw - 24px)}
+.brand{display:flex;align-items:center;gap:8px;font:800 16px var(--sans);letter-spacing:-.01em;margin-right:10px;white-space:nowrap}
+.brand img{width:26px;height:26px}
+nav .l{display:inline-flex;align-items:center;min-height:44px;padding:0 13px;border-radius:999px;font:500 14.5px var(--sans);color:var(--mut);white-space:nowrap}
+nav .l:hover{background:#1010180a;color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:999px;font:650 15px var(--sans);border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .2s,background .2s}
+.btn.k{background:var(--ink);color:#fff}.btn.k:hover{background:var(--acc)}
+.btn.o{border-color:var(--ink);background:transparent;color:var(--ink)}.btn.o:hover{background:var(--ink);color:#fff}
+.btn.w{background:#fff;color:var(--ink)}.btn.w:hover{background:var(--acc-soft)}
+.btn:active{transform:scale(.97)}
+.btn .ar{transition:transform .2s}.btn:hover .ar{transform:translateX(4px)}
+
+/* hero */
+.hero{position:relative;padding:clamp(96px,12vh,140px) 0 40px;overflow:hidden}
+.hero>.wrap{position:relative;z-index:1;pointer-events:none}
+.hero>.wrap a,.hero>.wrap button{pointer-events:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 5px var(--acc-soft)}
+h1{margin:0;font:800 clamp(40px,7vw,104px)/.95 var(--sans);letter-spacing:-.05em}
+h1 .ln{display:block;overflow:hidden;padding:.14em 0 .16em;margin:-.14em 0 -.16em}
+h1 .ln>span{display:block;transform:translateY(110%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .ln:nth-child(2)>span{animation-delay:.08s}h1 .ln:nth-child(3)>span{animation-delay:.16s}
+@keyframes up{to{transform:none}}
+.answer{margin:clamp(18px,2.4vw,30px) 0 18px;max-width:34ch;font:500 clamp(19px,1.7vw,24px)/1.4 var(--sans);letter-spacing:-.02em;color:var(--ink)}
+.answer strong{font-weight:800}
+.hero-grid{display:grid;grid-template-columns:minmax(0,520px) 1fr;gap:clamp(24px,4vw,64px);align-items:center;margin-top:0}
+.lead{margin:0 0 26px;font-size:clamp(17px,1.5vw,20px);color:var(--mut);max-width:440px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.meter{margin-top:34px;border-top:1px solid var(--line);padding-top:18px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline;font-size:14px;color:var(--mut)}
+.meter b{font:700 34px/1 var(--sans);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
+.meter .bar{grid-column:1/-1;height:6px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:6px}
+.meter .bar i{display:block;height:100%;width:54%;background:var(--acc);border-radius:9px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+
+/* before / after */
+.ba{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:#000;touch-action:pan-y;user-select:none;box-shadow:0 40px 80px -30px #10101855}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .after{clip-path:inset(0 0 0 var(--p,50%))}
+.ba .h{position:absolute;top:0;bottom:0;left:var(--p,50%);width:2px;background:#fff;pointer-events:none}
+.ba .h i{position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;font:800 16px var(--sans);font-style:normal;box-shadow:0 8px 26px #0006}
+.ba .lb{position:absolute;bottom:16px;padding:6px 12px;border-radius:999px;font:700 11.5px var(--sans);letter-spacing:.1em;pointer-events:none}
+.ba .l1{left:16px;background:#101018cc;color:#fff}.ba .l2{right:16px;background:#fff;color:var(--ink)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.ba:has(input:focus-visible){outline:3px solid var(--acc);outline-offset:4px}
+.rooms{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.rooms button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:transparent;font:600 14px var(--sans);color:var(--mut);cursor:pointer}
+.rooms button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.fight{position:fixed;right:-1vw;bottom:0;width:calc(var(--cyw) / .92);aspect-ratio:645/1007;z-index:0;pointer-events:none}
+.fight .hero-ares{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:right bottom}
+.fight{transform-origin:60% 38%;will-change:transform,opacity,filter}
+section,footer,.hero>.wrap{position:relative;z-index:1}
+.fx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fx .ph{position:absolute;left:0;top:0;border:2px solid #fff;border-radius:3px;background:center/cover;filter:grayscale(1) brightness(.78) contrast(.85) blur(.4px);box-shadow:0 8px 18px #10101830;will-change:transform,opacity}
+.fx .px{position:absolute;left:0;top:0;border-radius:1px;will-change:transform,opacity}
+.fx .ring{position:absolute;border-radius:50%;border:3px solid #a99bff;box-shadow:0 0 24px #8f7bff,inset 0 0 18px #8f7bff88;pointer-events:none}
+:root{--cyw:min(calc(100svh * 645 / 1007 * .92),36vw)}
+@media (min-width:901px){
+ .hero>.wrap,section>.wrap,footer>.wrap{margin-left:clamp(20px,5vw,90px);margin-right:calc(var(--cyw) + 3vw);max-width:none}
+ .end{margin-left:clamp(20px,5vw,90px)!important;margin-right:calc(var(--cyw) + 3vw)!important;grid-template-columns:1fr!important}
+ .hero-grid{grid-template-columns:minmax(0,640px)}
+ #ares1 .a1{grid-template-columns:1fr;gap:36px}
+ #ares1 .a1-steps{grid-template-columns:1fr 1fr;column-gap:28px}
+ #ares1 .a1-screen{max-width:640px}
+}
+.fight .ph{position:absolute;left:0;top:0;border:2px solid #fff;border-radius:3px;background:center/cover;filter:grayscale(1) brightness(.78) contrast(.85) blur(.4px);box-shadow:0 8px 18px #10101830;will-change:transform,opacity}
+.fight .px{position:absolute;left:0;top:0;border-radius:1px;will-change:transform,opacity}
+.fight .ring{position:absolute;border-radius:50%;border:3px solid #a99bff;box-shadow:0 0 24px #8f7bff,inset 0 0 18px #8f7bff88;pointer-events:none}
+.hero .marq{position:relative;z-index:1;background:var(--paper)}
+@media (max-width:900px){.fight{right:-18vw;opacity:.16}.hero>.wrap{pointer-events:auto}}
+@media (prefers-reduced-motion:reduce){.fight .ph,.fight .px,.fight .ring{display:none}.fight .stance{animation:none}}
+/* marquee */
+.marq{margin-top:clamp(50px,7vw,90px);border-block:1px solid var(--line);overflow:hidden;padding:18px 0}
+.marq div{display:flex;gap:44px;width:max-content;animation:mq 38s linear infinite;font:700 clamp(20px,2.4vw,30px) var(--sans);letter-spacing:-.02em;white-space:nowrap}
+.marq span::after{content:"✳";margin-left:44px;color:var(--acc);font-weight:400;font-family:var(--sans);font-style:normal}
+.marq span:nth-child(even){font-family:var(--serif);font-style:italic;font-weight:400}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:clamp(70px,10vw,140px) 0;scroll-margin-top:70px}
+h2{margin:14px 0 0;font:800 clamp(34px,5.2vw,72px)/1 var(--sans);letter-spacing:-.04em;max-width:16ch}
+.sub{color:var(--mut);max-width:520px;font-size:18px;margin:18px 0 0}
+
+/* numbers */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:44px}
+.nums div{padding:22px 20px 6px 0;border-right:1px solid var(--line)}
+.nums div+div{padding-left:20px}.nums div:last-child{border:0}
+.nums b{display:block;font:800 clamp(38px,5vw,76px)/1 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.nums span{display:block;margin-top:10px;color:var(--mut);font-size:15px;max-width:22ch}
+.src{margin-top:22px;font-size:13px;color:var(--mut)}
+
+/* steps: sticky title + rows */
+.how{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,5vw,80px);align-items:start}
+.how .stick{position:sticky;top:110px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:8px 26px;padding:34px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{font:400 clamp(54px,6vw,92px)/.8 var(--serif);font-style:italic;color:var(--acc);grid-row:1/3;min-width:1.1em}
+.step h3{margin:0;font:750 clamp(22px,2.3vw,30px)/1.1 var(--sans);letter-spacing:-.03em}
+.step p{margin:0;color:var(--mut)}
+
+/* Ares1 dark window */
+.dark{background:var(--night);color:#f1efff;border-radius:calc(var(--r) + 8px);padding:clamp(22px,4vw,56px);margin:0 clamp(8px,1.5vw,20px)}
+.dark .top{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:end;margin-bottom:34px}
+.dark h2{color:#fff}.dark .eyebrow{color:#a9a3cf}
+.dark ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;color:#cfc9f3;font-size:16px}
+.dark li{display:flex;gap:12px;align-items:baseline}.dark li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#8f7bff;transform:translateY(-2px)}
+.stage{position:relative;border-radius:20px;overflow:hidden;border:1px solid #ffffff1c;background:#05040f}
+.stage iframe{border:0;width:1100px;height:760px;transform-origin:0 0;position:absolute;left:0;top:0}
+.chips{position:absolute;left:14px;right:14px;bottom:14px;display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
+.chip{background:#0b0a1ad9;border:1px solid #ffffff22;border-radius:999px;padding:7px 13px;font-size:12.5px;color:#cfc9f3}
+.chip b{color:#fff;margin-left:6px;font-variant-numeric:tabular-nums}
+
+.a1{display:grid;grid-template-columns:1fr minmax(0,560px);gap:clamp(28px,5vw,72px);align-items:center}
+.a1-steps{list-style:none;counter-reset:st;margin:28px 0 0;padding:0;display:grid;gap:0}
+.a1-steps li{counter-increment:st;display:grid;grid-template-columns:44px 1fr;gap:2px 14px;padding:16px 0;border-top:1px solid var(--line)}
+.a1-steps li::before{content:counter(st);grid-row:1/3;font:400 34px/1 var(--serif);font-style:italic;color:var(--acc)}
+.a1-steps b{font:750 18px/1.25 var(--sans);letter-spacing:-.01em}
+.a1-steps span{color:var(--mut);font-size:15.5px}
+.a1-screen{position:relative;background:var(--night);border-radius:var(--r);padding:12px;box-shadow:0 40px 80px -36px #10101860}
+.a1-screen .stage{border-radius:calc(var(--r) - 10px)}
+.a1-screen .chips{position:static;margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:900px){.a1{grid-template-columns:1fr}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:48px}
+.t{position:relative;border-radius:var(--r);background:var(--card);border:1px solid var(--line);padding:26px;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,opacity .8s}
+.t:hover{transform:translateY(-4px);box-shadow:0 24px 50px -24px #10101840}
+.t h3{margin:0 0 6px;font:750 22px/1.15 var(--sans);letter-spacing:-.03em}
+.t p{margin:0;color:var(--mut);font-size:15.5px;max-width:38ch}
+.t .viz{position:absolute;top:20px;right:20px;font:700 10.5px var(--sans);letter-spacing:.12em;padding:5px 10px;border-radius:999px;border:1px solid currentColor}
+.t.a{grid-column:span 4;min-height:380px;color:#fff;border:0}
+.t.a p,.t.e p,.t.b p{color:#ffffffe0}
+.t>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.t:hover>img{transform:scale(1.05)}
+.t.a::after,.t.e::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#10101800 30%,#101018e0)}
+.t.a>:not(img),.t.e>:not(img){position:relative;z-index:1}
+.t.a>.viz,.t.e>.viz{position:absolute}
+.t.b{grid-column:span 2;background:var(--acc);color:#fff;border:0}
+.t.b .big{font:400 96px/.8 var(--serif);font-style:italic;margin-bottom:auto}
+.t.c,.t.d{grid-column:span 2}
+.t.e{grid-column:span 2;color:#fff;border:0}
+.t.f{grid-column:span 6;min-height:0;flex-direction:row;align-items:center;justify-content:space-between;gap:24px;background:transparent}
+.honest{margin-top:18px;font-size:14px;color:var(--mut);max-width:70ch}
+
+/* who */
+.who{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin-top:48px}
+.who article{border-top:1px solid var(--ink);padding:26px 0 0}
+.who h3{margin:0 0 10px;font:800 clamp(28px,3.4vw,46px)/1 var(--sans);letter-spacing:-.04em}
+.who p{margin:0;color:var(--mut);max-width:44ch}
+
+/* cta + login */
+.end{background:var(--ink);color:#fff;border-radius:calc(var(--r) + 8px);margin:0 clamp(8px,1.5vw,20px);padding:clamp(28px,5vw,72px);display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(24px,5vw,72px);align-items:center}
+.end h2{color:#fff;max-width:14ch}.end .sub{color:#b9b6c9}
+.end em.s{color:#a99bff}
+.login{background:#fff;color:var(--ink);border-radius:var(--r);padding:28px}
+.login h3{margin:0 0 4px;font:800 24px var(--sans);letter-spacing:-.03em}
+.login p{margin:0 0 8px;color:var(--mut);font-size:15px}
+.login label{display:block;font:600 13px var(--sans);margin:14px 0 6px}
+.login input{width:100%;min-height:48px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;padding:0 14px;font:16px var(--sans)}
+.login input:focus{outline:3px solid var(--acc);outline-offset:1px}
+.login .btn{width:100%;margin-top:18px}
+.login .note{margin-top:12px;font-size:14px;color:var(--acc)}
+
+footer{padding:40px 0 50px;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer a:hover{color:var(--ink)}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.t.rv.in:hover{transform:translateY(-4px);transition-delay:0s}
+
+@media (max-width:900px){
+  nav .l{display:none}
+  nav{padding-left:12px;gap:4px}.brand{margin-right:4px;font-size:15px;flex:none}nav .btn{padding:0 14px;font-size:14px}
+  .hero-grid,.how,.dark .top,.end,.who{grid-template-columns:1fr}
+  .how .stick{position:static}
+  .nums{grid-template-columns:1fr 1fr}
+  .nums div,.nums div+div{border-right:0;border-bottom:1px solid var(--line);padding:20px 12px 18px 0}
+  .bento{grid-template-columns:1fr}
+  .t.a,.t.b,.t.c,.t.d,.t.e,.t.f{grid-column:auto}
+  .t.a{min-height:300px}
+  .t.f{flex-direction:column;align-items:flex-start}
+
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  h1 .ln>span{transform:none}.rv{opacity:1;transform:none}
+}
+
+/* ---- intro look: gradient accents, heavy sans type (matches page 1) ---- */
+:root{--g:linear-gradient(135deg,#2f6bff 0%,#6a46ff 45%,#c13bff 100%);--g-soft:linear-gradient(135deg,#8fb0ff 0%,#a98bff 50%,#e58bff 100%)}
+em.s{font-family:var(--sans);font-style:normal;font-weight:800;letter-spacing:-.04em;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.04em}
+.end em.s,.dark em.s{background:var(--g-soft);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{color:#4a3fd6}
+.eyebrow i{background:var(--g);box-shadow:0 0 0 5px #6a46ff22}
+.btn.k{background:var(--g);color:#fff;border:0;box-shadow:0 10px 26px -8px #6a46ffaa}.btn.k:hover{background:var(--g);filter:brightness(1.08)}
+.btn.w{background:#fff}
+.btn.o:hover{background:var(--g);border-color:transparent;color:#fff}
+.a1-steps li::before{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#fff;font:800 15px/1 var(--sans);font-style:normal;box-shadow:0 6px 16px -6px #6a46ffaa}
+.answer strong{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nums b{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent;width:fit-content}
+.meter b{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.meter .bar i{background:var(--g)}
+.ba .l2{background:var(--g);color:#fff}
+.rooms button[aria-pressed=true]{background:var(--g);border-color:transparent}
+.t.b{background:var(--g)}
+.t.b .big{font:800 88px/.85 var(--sans);font-style:normal;letter-spacing:-.05em}
+.t .viz{color:#5a3fe0}
+.who article{border-top:3px solid transparent;border-image:var(--g) 1}
+.login .note{color:#5a3fe0}
+.chip b{color:#c9b8ff}
+
+/* registration block: light, colourful, no dark slab */
+.join{position:relative;margin:0 clamp(8px,1.5vw,20px);border-radius:calc(var(--r) + 8px);padding:clamp(26px,4.5vw,64px);display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,4vw,56px);align-items:start;background:linear-gradient(135deg,#e9efff 0%,#efe8ff 50%,#fbe9ff 100%);border:1px solid #d9d2ff}
+.join h2{max-width:13ch}
+.join-list{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:10px;color:var(--ink);font-weight:600}
+.join-list li{position:relative;padding-left:32px;min-height:22px}.join-list li::before{content:"✓";position:absolute;left:0;top:1px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--g);color:#fff;font-size:12px}
+.join-forms{display:grid;gap:14px}
+.card-f{background:#fff;border-radius:var(--r);padding:24px 26px;box-shadow:0 20px 50px -28px #4a2fe066;border:1px solid #ece8ff}
+.card-f h3{margin:0 0 6px;font:800 22px var(--sans);letter-spacing:-.03em}
+.card-f label{display:block;font:600 13px var(--sans);margin:12px 0 6px}.card-f .opt{font-weight:400;color:var(--mut)}
+.card-f input{width:100%;min-height:46px;border:1px solid var(--line);background:#faf9f6;color:var(--ink);border-radius:12px;padding:0 14px;font:16px var(--sans)}
+.card-f input:focus{outline:3px solid #6a46ff55;border-color:#6a46ff}
+.card-f .btn{width:100%;margin-top:16px}
+.card-f.small{padding:20px 26px}
+.card-f .note{margin:10px 0 0;font-size:14px;color:#5a3fe0}
+@media (min-width:901px){.join{margin-left:clamp(20px,5vw,90px)!important;margin-right:calc(var(--cyw) + 3vw)!important;grid-template-columns:1fr}}
+@media (max-width:900px){.join{grid-template-columns:1fr}}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media (max-width:600px){.row2{grid-template-columns:1fr}}
+.stepbar{display:flex;gap:8px;margin-bottom:14px}.stepbar span{font:700 12px var(--sans);letter-spacing:.04em;padding:5px 11px;border-radius:999px;background:#f1eefc;color:#7a72a8}.stepbar span.on{background:var(--g);color:#fff}
+.rules{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.rules li{font:600 12.5px var(--sans);padding:5px 10px;border-radius:999px;background:#f4f3ef;color:var(--mut)}
+.rules li::before{content:"○ "}.rules li.ok{background:#e9f8ef;color:#167a43}.rules li.ok::before{content:"✓ "}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;margin:14px 0 4px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:700 15px var(--sans);text-decoration:none;transition:border-color .2s,box-shadow .2s}
+.gbtn:hover{border-color:#6a46ff;box-shadow:0 4px 16px #6a46ff22}.gbtn:focus-visible{outline:3px solid #6a46ff55}
+.or{display:flex;align-items:center;gap:12px;margin:14px 0 2px;color:var(--mut);font:600 12.5px var(--sans)}.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.card-f label.consent{display:flex;gap:10px;align-items:flex-start;font:500 14px/1.45 var(--sans);margin:16px 0 0;cursor:pointer}
+.card-f label.consent input{width:20px;min-height:20px;height:20px;flex:none;margin:1px 0 0;accent-color:#6a46ff}
+.err{margin:12px 0 0;color:#b4232f;font-weight:600;font-size:14px}
+.hint{margin:0 0 14px;color:var(--mut);font-size:14px}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:600px){.plan-grid{grid-template-columns:1fr}}
+.plan{position:relative;text-align:left;cursor:pointer;border:1.5px solid var(--line);background:#fff;border-radius:18px;padding:18px;font:inherit;color:var(--ink);display:grid;gap:6px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.plan:hover{transform:translateY(-2px);border-color:#a99bff}
+.plan.sel{border-color:#6a46ff;box-shadow:0 0 0 3px #6a46ff33}
+.plan b{font:800 20px var(--sans);letter-spacing:-.02em}.plan .price{font:700 15px var(--sans);color:var(--mut)}
+.plan ul{margin:6px 0 4px;padding:0 0 0 18px;color:var(--mut);font-size:14px}
+.plan .pick{margin-top:4px;font:700 14px var(--sans);color:#5a3fe0}
+.plan.hot{border-color:transparent;background:linear-gradient(#fff,#fff) padding-box,var(--g) border-box}
+.plan .tag{position:absolute;top:-10px;right:14px;font:700 11px var(--sans);font-style:normal;color:#fff;background:var(--g);padding:4px 10px;border-radius:999px}
+.skip{display:block;margin:14px auto 0;background:none;border:0;color:var(--mut);font:600 14px var(--sans);text-decoration:underline;text-underline-offset:3px;cursor:pointer;min-height:44px}
+.skip:hover{color:var(--ink)}
+
+/* arc-reactor style engine on Ares's chest with the logo as its core */
+.core{position:absolute;left:var(--cx);top:var(--cy);width:var(--cw);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:2;border-radius:50%}
+.core .rim{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffff 0%,#f6f7fb 45%,#dfe2ea 75%,#c7cbd6 100%);box-shadow:0 2px 6px #0004,inset 0 -2px 4px #0000001f,inset 0 2px 3px #fff}
+.core .coil{position:absolute;inset:6%;border-radius:50%;background:repeating-conic-gradient(#b9a4ff 0 7deg,#ffffff00 7deg 15deg);-webkit-mask:radial-gradient(circle,transparent 58%,#000 60%);mask:radial-gradient(circle,transparent 58%,#000 60%);animation:coilSpin 12s linear infinite;box-shadow:0 0 6px #b9a4ff88}
+.core .well{position:absolute;inset:25%;border-radius:50%;background:radial-gradient(circle,#ffffff 0%,#f3eeff 35%,#cdbfff 65%,#a58bff 100%);box-shadow:inset 0 0 4px #6a46ff55,0 0 8px #b9a4ffaa;animation:wellPulse 1.8s ease-in-out infinite}
+.core img{position:absolute;inset:30%;width:40%;height:40%;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #b9a4ffaa);animation:logoPulse 1.8s ease-in-out infinite}
+.core::before{content:"";position:absolute;inset:-45%;border-radius:50%;background:radial-gradient(circle,#c9b8ff77 0%,#a58bff22 38%,transparent 66%);animation:coreGlow 1.8s ease-in-out infinite;z-index:-1}
+.core::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid #cbbcff;opacity:0;animation:coreRing 1.8s ease-out infinite}
+@keyframes coilSpin{to{transform:rotate(360deg)}}
+@keyframes wellPulse{0%,100%{filter:brightness(.97)}50%{filter:brightness(1.12)}}
+@keyframes logoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes coreGlow{0%,100%{opacity:.5;transform:scale(.85)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes coreRing{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(1.8)}}
+@media (prefers-reduced-motion:reduce){.core *,.core::before,.core::after{animation:none!important}}
+
+/* scroll text dissolve: letters turn into code and vanish while leaving the top, rebuild on the way back */
+.cw{white-space:nowrap}
+.ch{display:inline-block;transition:opacity .25s,transform .35s,filter .35s}
+.ch.s{color:transparent!important;position:relative}
+.ch.s::after{content:attr(data-g);position:absolute;left:0;top:0;color:#6a46ff;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-weight:600;-webkit-text-fill-color:#6a46ff}
+.ch.g{opacity:0;transform:translateY(-10px) scale(.6);filter:blur(2px)}
+em.s .ch{display:inline}
+em.s .ch.g{visibility:hidden}
+em.s .ch.s{visibility:hidden}
+em.s .ch.s::after{visibility:visible}
+@media (prefers-reduced-motion:reduce){.ch{transition:none}}
+
+nav .btn.o{min-height:44px;padding:0 18px;border-color:#d9d2ff;background:#fff}
+.login-d{border:0;padding:0;background:transparent;width:min(420px,92vw)}
+.login-d::backdrop{background:#10101866;backdrop-filter:blur(4px)}
+.login-d .card-f{position:relative;padding:28px 28px 24px}
+.login-d .x{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;background:none;font-size:26px;line-height:1;color:var(--mut);cursor:pointer;border-radius:50%}
+.login-d .x:hover{background:#f1eefc;color:var(--ink)}
+@media (max-width:900px){nav .btn.o{padding:0 12px;font-size:14px}}
+
+/* badge sits in the card flow (never on top of the heading) */
+.t .viz{position:static;align-self:flex-start;margin:0 0 auto;display:inline-block}
+.t.a>.viz,.t.e>.viz{position:relative}
+.t:has(.viz){justify-content:flex-start}
+.t:has(.viz) h3{margin-top:18px}
+@media (min-width:901px){
+ #funkce .bento{grid-template-columns:1fr 1fr}
+ #funkce .t.a,#funkce .t.f{grid-column:span 2}
+ #funkce .t.b,#funkce .t.c,#funkce .t.d,#funkce .t.e{grid-column:span 1}
+}
+
+/* narrow desktops: forms stack, no element may poke out of its card */
+.join,.card-f,.join-forms,.join-copy{min-width:0}
+@media (min-width:901px) and (max-width:1280px){.row2{grid-template-columns:1fr}.join{padding:28px}.plan-grid{grid-template-columns:1fr}}
+@media (max-width:900px){.fight{width:auto;height:100svh}}
+@media (max-width:640px){
+ nav{left:12px;right:12px;transform:none;max-width:none;justify-content:space-between}
+ nav .brand{font-size:0;margin-right:0;gap:0}nav .brand img{width:30px;height:30px}
+ nav .btn{padding:0 14px;font-size:14px;min-height:42px}
+ .join{padding:20px 16px;margin:0 8px}.card-f{padding:20px 16px}
+}
+
+
+/* feature catalogue */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:40px}
+.fg{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.fg:hover{transform:translateY(-3px);box-shadow:0 24px 50px -28px #4a2fe055}
+.fg.wide{grid-column:span 2}
+.fg header{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.fi{flex:none;width:46px;height:46px;border-radius:14px;background:var(--g);display:grid;place-items:center;box-shadow:0 10px 22px -10px #6a46ffaa}
+.fi svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fk{display:block;font:700 11.5px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#5a3fe0}
+.fg h3{margin:2px 0 0;font:800 22px/1.15 var(--sans);letter-spacing:-.03em}
+.fg ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.fg.wide ul{grid-template-columns:1fr 1fr;column-gap:28px}
+.fg li{padding:12px 0 12px 22px;border-top:1px solid #efede7;position:relative}
+.fg li::before{content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;border-radius:50%;background:var(--g)}
+.fg li>b{display:block;font:700 15.5px/1.3 var(--sans);letter-spacing:-.01em}
+.fg li>span{display:block;color:var(--mut);font-size:14.5px;line-height:1.45;margin-top:2px}
+.fcta{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px dashed #d9d2ff;border-radius:var(--r);padding:18px 24px;background:linear-gradient(135deg,#f3f0ff,#fbf2ff)}
+.fcta p{margin:0;color:var(--mut)}.fcta b{color:var(--ink)}
+@media (max-width:1100px){.fg.wide ul{grid-template-columns:1fr}}
+@media (max-width:760px){.fgrid{grid-template-columns:1fr}.fg.wide{grid-column:auto}.fcta{flex-direction:column;align-items:flex-start}}
+
+.fg li>b .vz{display:inline-block;vertical-align:2px;margin-left:6px;font:700 9.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:#5a3fe0;border:1px solid #cbbcff;border-radius:999px;padding:2px 7px}
+
+.fsub{margin:0 0 6px;color:var(--mut);font-size:14.5px;max-width:62ch}
+.fsub .vz{display:inline-block;vertical-align:1px;margin-right:6px;font:700 9.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:#5a3fe0;border:1px solid #cbbcff;border-radius:999px;padding:2px 7px}
+.fshop{margin-top:14px;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,#f1f4ff,#f7efff);border:1px solid #e4dcff}
+.fshop>b{display:block;font:700 15.5px var(--sans)}.fshop>span{display:block;color:var(--mut);font-size:14.5px;margin-top:2px}
+
+.who-many{grid-template-columns:repeat(2,1fr);gap:28px 40px}
+.who-many article{padding-top:20px}
+.who-many h3{font-size:clamp(22px,2.2vw,30px)}
+@media (min-width:1500px){.who-many{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.who-many{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Hlavní">
+ <a class="brand" href="index.html"><img src="logo.svg" alt="">AI Bot Ares</a>
+ <a class="l" href="#ares1">Jak to funguje</a><a class="l" href="#funkce">Funkce</a><a class="l" href="#pro-koho">Pro koho</a>
+ <button class="btn o" type="button" id="openLogin">Přihlásit se</button>
+ <a class="btn k" href="#registrace">Registrace</a>
+</nav>
+<dialog class="login-d" id="loginD" aria-labelledby="loginT">
+ <form class="card-f" id="loginF" method="dialog" novalidate>
+  <button class="x" type="button" id="closeLogin" aria-label="Zavřít">×</button>
+  <h3 id="loginT">Přihlášení</h3>
+  <p class="hint">Vítejte zpět. Přihlaste se do AI Bot Ares.</p>
+  <label for="le">E-mail</label><input id="le" type="email" autocomplete="username" placeholder="vy@realitka.cz" required>
+  <label for="lp">Heslo</label><input id="lp" type="password" autocomplete="current-password" required>
+  <button class="btn k" type="submit">Přihlásit se</button>
+  <p class="note" id="loginMsg" role="status" hidden>Přihlášení zapojíme při spuštění aplikace. Zatím se nic neodeslalo.</p>
+  <p class="hint" style="margin:14px 0 0;text-align:center">Nemáte účet? <a href="#registrace" id="toReg" style="color:#5a3fe0;font-weight:700">Zaregistrujte se</a></p>
+ </form>
+</dialog>
+
+<header class="hero">
+<div class="fight" id="fight" aria-hidden="true"><img class="hero-ares" id="heroAres" src="ares-full.webp" alt="" style="transform:scaleX(-1)"><span class="core" style="--cx:49.5%;--cy:40%;--cw:12.2%" aria-hidden="true"><i class="coil"></i><img src="logo.svg" alt=""></span></div>
+<div class="wrap">
+ <div class="hero-grid">
+  <div>
+   <h1><span class="ln"><span>Co je</span></span><span class="ln"><span><em class="s">Ares?</em></span></span></h1>
+   <p class="answer"><strong>Velitel vaší zakázky.</strong> Ares řídí armádu robotů a každý z nich umí jednu věc dokonale. Jeden rozsvítí tmavý pokoj, druhý srovná křivý záběr, třetí vyčistí bílé stěny, další připraví text inzerátu. Vy nahrajete fotky z mobilu, Ares rozdělí práci a hlídá výsledek.</p>
+   <p class="lead">Za pár minut máte celou zakázku připravenou k prezentaci. Bez fotografa, bez Photoshopu a bez dlouhého čekání.</p>
+  </div>
+ </div>
+</div>
+</header>
+
+<section id="ares1"><div class="wrap a1">
+ <div class="a1-copy rv">
+  <span class="eyebrow"><i></i>Jak AI Bot Ares funguje</span>
+  <h2>Chytrá kombinace autonomních robotů <em class="s">a AI.</em></h2>
+  <p class="sub">Ares nejdřív načte celou fotku a pak ji rozloží na jednotlivé pixely. Díky tomu zná každý detail snímku a může s ním efektivně pracovat. Vy už jen doladíte finální výsledek.</p>
+  <ol class="a1-steps">
+   <li><b>Nahrajete fotky</b><span>Rovnou z mobilu nebo z Google Disku. Přiřadíte místnosti a víc nic.</span></li>
+   <li><b>Ares je projde</b><span>Změří světlo, barvy a ostrost a ukáže přesný seznam, co jde zlepšit.</span></li>
+   <li><b>Roboti opraví</b><span>Každá fotka vletí do jádra, když ji robot opravdu zpracovává, a odletí upravená.</span></li>
+   <li><b>Potvrdíte a hotovo</b><span>Bezpečné opravy proběhnou samy, zbytek jen s vaším souhlasem. Fotky máte v projektu.</span></li>
+  </ol>
+ </div>
+ <div class="a1-screen rv" style="--d:.1s">
+  <div class="stage" id="stage"><iframe src="core.html" title="Ukázka: Ares zpracovává fotky" loading="lazy"></iframe></div>
+  <div class="chips"><span class="chip">Fotky<b>8 / 15</b></span><span class="chip">Jas kuchyně<b>54 → 76</b></span><span class="chip">Krok<b>Upravuji světlo a barvy…</b></span></div>
+ </div>
+</div></section>
+
+<section style="padding-top:clamp(50px,7vw,90px)"><div class="wrap">
+ <span class="eyebrow rv"><i></i>Změřeno, ne slíbeno</span>
+ <div class="nums">
+  <div class="rv"><b data-c="15">15</b><span>fotek zanalyzováno za 13 sekund</span></div>
+  <div class="rv" style="--d:.08s"><b data-c="27">27</b><span>nalezených chyb a možností vylepšení</span></div>
+  <div class="rv" style="--d:.16s"><b data-c="36" data-s=" s">36 s</b><span>trvalo robotům opravit 5 fotek</span></div>
+  <div class="rv" style="--d:.24s"><b data-c="40" data-s=" min">40 min</b><span>trvala příprava kompletní inzerce</span></div>
+ </div>
+ <p class="src">Skutečné hodnoty z naší zkoušky na 15 fotkách bytu z mobilu, 11. 11. 2026.</p>
+</div></section>
+
+<section id="pred-po" style="padding-top:20px"><div class="wrap hero-grid">
+ <div class="rv">
+  <span class="eyebrow"><i></i>Před / Po</span>
+  <h2>Posuňte a uvidíte <em class="s">rozdíl.</em></h2>
+  <p class="sub">Stejná fotka z mobilu, vlevo jak přišla, vpravo po robotech Arese.</p>
+ </div>
+  <div class="rv">
+   <div class="ba" id="ba"><img id="bb" src="a5-before.jpg?v=4" alt="Kuchyň před úpravou"><img id="aa" class="after" src="a5-after.jpg?v=4" alt="Kuchyň po úpravě"><div class="h"><i>↔</i></div><span class="lb l1">PŘED</span><span class="lb l2">PO · ARES</span><input id="rng" type="range" min="0" max="100" value="50" aria-label="Posuvník Před a Po"></div>
+   <div class="rooms" role="group" aria-label="Vyberte místnost">
+    <button aria-pressed="true" data-n="5" data-a="54" data-b="76" data-l="jas kuchyně před a po úpravě" data-r="Kuchyň">Kuchyň</button>
+    <button aria-pressed="false" data-n="1" data-a="56" data-b="77" data-l="jas ložnice před a po úpravě" data-r="Ložnice">Ložnice</button>
+    <button aria-pressed="false" data-n="9" data-a="46" data-b="72" data-l="jas obýváku před a po úpravě" data-r="Obývák">Obývák</button>
+   </div>
+  </div>
+</div></section>
+
+<section id="funkce"><div class="wrap">
+ <span class="eyebrow rv"><i></i>Funkce</span>
+ <h2 class="rv">Všechny profi nástroje <em class="s">na jednom místě.</em></h2>
+  <div class="fgrid">
+  <article class="fg wide rv"><header><i class="fi"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></i><div><span class="fk">Foto Lab</span><h3>Ukažte klientovi, co z bytu může být</h3></div></header><p class="fsub"><i class="vz">vizualizace</i> Návrhy pro představu kupujícího, vždy viditelně označené. Na vlastních fotkách nemovitosti zůstává skutečný stav.</p><ul><li><b>Oddálení záběru</b><span>Širší pohled do malé místnosti.</span></li><li><b>Odstranění předmětů</b><span>Osoby, kabely a nepořádek zmizí.</span></li><li><b>Úklid a ustlání</b><span>Ustlaná postel, uklizená linka, prázdný pokoj.</span></li><li><b>Podlahy a stěny</b><span>Jiná podlaha nebo barva stěn za pár sekund.</span></li><li><b>Koupelny a kuchyně</b><span>Nové obklady, dlažba i barva linky.</span></li><li><b>Fasády, okna a dveře</b><span>Rodinné i činžovní domy v novém kabátě.</span></li><li><b>Garážová vrata</b><span>Moderní vrata místo starých.</span></li><li><b>Obrazy na zeď</b><span>Prázdné stěny přestanou působit holě.</span></li></ul><div class="fshop"><b>Katalog výrobků z obchodů</b><span>Materiály a vybavení od skutečných prodejců. Klient vidí, jak by byt vypadal, a výrobek najde rovnou v e-shopu.</span></div></article>
+  <article class="fg  rv"><header><i class="fi"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></i><div><span class="fk">Inzerát a marketing</span><h3>Od fotky k hotové nabídce</h3></div></header><ul><li><b>Titulek a text inzerátu</b><span>Z ověřených údajů o nemovitosti, vždy jako návrh k vaší kontrole.</span></li><li><b>Kontrola před zveřejněním</b><span>Cena, údaje, půdorysy a chybějící podklady na jednom seznamu.</span></li><li><b>Marketing</b><span>Kampaně a texty pro vaše kanály a sítě.</span></li><li><b>Video Lab</b><span>Prezentace nemovitosti v pohybu.</span></li></ul></article>
+  <article class="fg  rv"><header><i class="fi"><svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg></i><div><span class="fk">Data a podklady</span><h3>Čísla a fakta k nemovitosti</h3></div></header><ul><li><b>Katastr</b><span>Údaje k parcele na jednom místě.</span></li><li><b>Územní plán</b><span>Co lze na pozemku postavit a podle jakých pravidel.</span></li><li><b>Dokumenty</b><span>Přečte a roztřídí podklady a upozorní, když si odporují.</span></li><li><b>Ocenění a investice</b><span>Srovnatelné nemovitosti, výnos, cashflow a financování.</span></li></ul></article>
+  <article class="fg wide rv"><header><i class="fi"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2 .8 3 2.9 3 6"/></svg></i><div><span class="fk">Obchod a klienti</span><h3>Vše kolem zakázky v jednom systému</h3></div></header><ul><li><b>Klienti a zájemci</b><span>Přehled poptávek, komunikace a obchodního stavu.</span></li><li><b>Kalendář a úkoly</b><span>Agenda nemovitosti i celé kanceláře.</span></li><li><b>Kontrola trhu</b><span>Uložená hledání, která hlídají nové nabídky za vás.</span></li><li><b>Automatizace</b><span>Opakované kroky běží samy, vy jen schvalujete.</span></li></ul></article>
+ </div>
+ <div class="fcta rv"><p><b>Ares, váš pomocník v aplikaci.</b> Zeptáte se, poradí, kde co najdete a jaký je další krok.</p><a class="btn o" href="#registrace">Chci to vyzkoušet <span class="ar">→</span></a></div>
+ <p class="honest">Každá fotka z Arese nese neviditelný podpis AIBOTARES. Naše čtečka z něj pozná, jestli a jak byla fotka upravená.</p>
+</div></section>
+
+<section id="pro-koho" style="padding-top:0"><div class="wrap">
+ <span class="eyebrow rv"><i></i>Pro koho</span>
+ <h2 class="rv">Pro každého, kdo pracuje <em class="s">s nemovitostmi.</em></h2>
+ <p class="sub rv">Prodej, pronájem, výstavba i investice. Ares pomáhá všude, kde nemovitost potřebuje dobře vypadat a mít v pořádku podklady.</p>
+ <div class="who who-many">
+  <article class="rv"><h3>Makléři</h3><p>Fotíte sami na mobil a nemáte čas na úpravy. Ares připraví fotky i podklady k inzerátu, vy se věnujete klientům.</p></article>
+  <article class="rv" style="--d:.08s"><h3>Realitní kanceláře</h3><p>Jednotný vzhled inzerátů celé kanceláře, desítky zakázek týdně a přehled o každé z nich.</p></article>
+  <article class="rv"><h3>Developeři</h3><p>Vizualizace fasád, interiérů a materiálů pro prodej bytů, které ještě nejsou dokončené.</p></article>
+  <article class="rv" style="--d:.08s"><h3>Investoři</h3><p>Katastr, územní plán a výpočet výnosu i cashflow dřív, než se rozhodnete koupit.</p></article>
+  <article class="rv"><h3>Pronajímatelé</h3><p>Světlé a čisté fotky, které přitáhnou nájemníky i hosty krátkodobých pronájmů.</p></article>
+  <article class="rv" style="--d:.08s"><h3>Rekonstrukce a stavebníci</h3><p>Ukažte zákazníkovi novou koupelnu, podlahu nebo fasádu dřív, než začnete stavět.</p></article>
+  <article class="rv"><h3>Majitelé, kteří prodávají sami</h3><p>Profesionální fotky a hotový text inzerátu i bez realitní kanceláře.</p></article>
+ </div>
+</div></section>
+
+<section id="registrace" style="padding:0 0 30px;scroll-margin-top:90px"><div class="join">
+ <div class="join-copy rv">
+  <span class="eyebrow"><i></i>Registrace</span>
+  <h2>Přidejte se k armádě <em class="s">Arese.</em></h2>
+  <p class="sub">Založte si účet a nahrajte první zakázku. Ares projde fotky a roboti je připraví k inzerci.</p>
+  <ul class="join-list"><li>Celá zakázka najednou</li><li>Před / Po u každé fotky</li><li>Každá úprava poctivě označená podpisem AIBOTARES</li></ul>
+ </div>
+ <div class="join-forms rv" style="--d:.1s">
+  <form class="card-f" id="registr" novalidate>
+   <div class="stepbar" aria-hidden="true"><span class="on">1 Účet</span><span>2 Předplatné</span></div>
+   <h3>Registrace</h3>
+   <a class="gbtn" id="gReg" href="#"><svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#4285F4" d="M45.1 24.5c0-1.6-.1-3.1-.4-4.5H24v8.5h11.8c-.5 2.8-2.1 5.1-4.4 6.7v5.5h7.1c4.2-3.8 6.6-9.5 6.6-16.2z"/><path fill="#34A853" d="M24 46c5.9 0 10.9-2 14.5-5.3l-7.1-5.5c-2 1.3-4.5 2.1-7.4 2.1-5.7 0-10.5-3.8-12.2-9H4.5v5.7C8.1 41.1 15.5 46 24 46z"/><path fill="#FBBC05" d="M11.8 28.3c-.4-1.3-.7-2.8-.7-4.3s.3-2.9.7-4.3v-5.7H4.5C3 17 2 20.4 2 24s1 7 2.5 10l7.3-5.7z"/><path fill="#EA4335" d="M24 10.7c3.2 0 6.1 1.1 8.4 3.3l6.3-6.3C34.9 4.1 29.9 2 24 2 15.5 2 8.1 6.9 4.5 14l7.3 5.7c1.7-5.2 6.5-9 12.2-9z"/></svg>Pokračovat přes Google</a>
+   <div class="or"><span>nebo e-mailem</span></div>
+   <div class="row2">
+    <div><label for="rn">Jméno a příjmení</label><input id="rn" autocomplete="name" required></div>
+    <div><label for="rk">Realitní kancelář</label><input id="rk" autocomplete="organization" required></div>
+   </div>
+   <div class="row2">
+    <div><label for="re">E-mail</label><input id="re" type="email" autocomplete="email" placeholder="vy@realitka.cz" required></div>
+    <div><label for="rt">Telefon</label><input id="rt" type="tel" autocomplete="tel" placeholder="+420 777 123 456" required></div>
+   </div>
+   <div class="hp" aria-hidden="true"><label for="rw">Web</label><input id="rw" name="website" tabindex="-1" autocomplete="off"></div>
+   <label class="consent"><input id="rc" type="checkbox" required> <span>Souhlasím se zpracováním údajů, abychom vám mohli založit účet a ozvat se.</span></label>
+   <p class="hint" style="margin:10px 0 0">Heslo si nastavíte bezpečně až v aplikaci, odkaz vám pošleme e-mailem.</p>
+   <p class="err" id="regErr" role="alert" hidden></p>
+   <button class="btn k" type="submit">Pokračovat k předplatnému →</button>
+  </form>
+  <div class="card-f" id="plans" hidden>
+   <div class="stepbar" aria-hidden="true"><span>1 Účet</span><span class="on">2 Předplatné</span></div>
+   <h3>Vyberte si předplatné</h3>
+   <p class="hint">Cvičné tarify, ceny a limity doplníme před spuštěním.</p>
+   <div class="plan-grid">
+    <button type="button" class="plan" data-p="Start"><b>Start</b><span class="price">— Kč / měsíc</span><ul><li>Pro jednoho makléře</li><li>Světlo, barvy, ostrost</li><li>Před / Po u každé fotky</li></ul><span class="pick">Vybrat Start</span></button>
+    <button type="button" class="plan hot" data-p="Pro"><i class="tag">Doporučeno</i><b>Pro</b><span class="price">— Kč / měsíc</span><ul><li>Celá kancelář</li><li>Vše ze Startu + vizualizace</li><li>Katastr, texty, marketing</li></ul><span class="pick">Vybrat Pro</span></button>
+   </div>
+   <button type="button" class="skip" id="skipPay">Přeskočit, zaplatím později</button>
+   <p class="note" id="planNote" role="status" hidden></p>
+  </div>
+ </div>
+</div></section>
+
+<footer><div class="wrap">
+ <a class="brand" href="index.html" style="color:var(--ink)"><img src="logo.svg" alt="">AI Bot Ares</a>
+ <a href="mailto:patrikkos46@gmail.com">patrikkos46@gmail.com</a>
+ <span>© 2026 aibotares.cz</span>
+</div></footer>
+
+<script>
+// The digital Ares grows as you scroll and slowly dissolves (fades and blurs) toward the end of the page.
+(function(){const f=document.getElementById('fight'); if(!f||innerWidth<=900) return;
+ let ticking=false; const upd=()=>{ticking=false; const max=document.documentElement.scrollHeight-innerHeight; const p=max>0?Math.min(1,scrollY/max):0; const k=1+1.7*p*p; const fade=Math.max(0,Math.min(1,(p-.35)/.65)); f.style.transform=`scale(${k})`; f.style.opacity=(1-.9*fade).toFixed(3); f.style.filter=`blur(${(fade*3).toFixed(2)}px)`;};
+ addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true}); addEventListener('resize',upd); upd();})();
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Before / After slider: drag, keyboard (range input), gentle auto-sway until first touch
+const ba = document.getElementById('ba'), rng = document.getElementById('rng');
+const setP = p => ba.style.setProperty('--p', p + '%');
+let auto = !calm, t = 0;
+rng.addEventListener('input', () => { auto = false; setP(rng.value); });
+['pointerdown', 'keydown'].forEach(e => rng.addEventListener(e, () => auto = false));
+(function sway() { if (auto) { t += .012; const p = 50 + 30 * Math.sin(t); rng.value = p; setP(p); requestAnimationFrame(sway); } })();
+// room switch updates photos and the brightness meter
+document.querySelectorAll('.rooms button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('.rooms button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const n = b.dataset.n, bb = document.getElementById('bb'), aa = document.getElementById('aa');
+  bb.src = `a${n}-before.jpg?v=4`; aa.src = `a${n}-after.jpg?v=4`; bb.alt = b.dataset.r + ' před úpravou'; aa.alt = b.dataset.r + ' po úpravě';
+}));
+// reveal on scroll + count-up numbers
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; e.target.classList.add('in'); io.unobserve(e.target);
+  const b = e.target.querySelector('b[data-c]'); if (!b || calm) return;
+  const end = +b.dataset.c, suf = b.dataset.s || '', t0 = performance.now();
+  (function tick(now) { const k = Math.min(1, (now - t0) / 900), v = Math.round(end * (1 - Math.pow(1 - k, 3))); b.textContent = v + suf; if (k < 1) requestAnimationFrame(tick); })(t0);
+}), { threshold: .15 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+// Ares1 preview: scale the fixed-size demo to the panel width
+const stage = document.getElementById('stage'), fr = stage.querySelector('iframe');
+const fit = () => { const s = stage.clientWidth / 1100; fr.style.transform = `scale(${s})`; stage.style.height = Math.round(760 * s) + 'px'; };
+fit(); addEventListener('resize', fit);
+// Registration: step 1 contact details, step 2 plan; the choice sends everything to the app (no passwords on the web).
+(function(){
+ // Address of the app's public signup endpoint. Local app for now; switch to the hosted app before publishing.
+ const API = location.hostname === 'aibotares.cz' || location.hostname === 'www.aibotares.cz'
+  ? 'https://app.aibotares.cz/api/public/signup' : 'http://localhost:3000/api/public/signup';
+ // Until the app is online, the public site sends registrations by e-mail and hides the Google button.
+ const APP_ONLINE = false;
+ const IS_LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+ const MAIL_MODE = !APP_ONLINE && !IS_LOCAL;
+ if (MAIL_MODE) { document.getElementById('gReg').hidden = true; document.querySelector('#registr .or').hidden = true;
+  const h=document.querySelector('#registr .hint'); if(h) h.textContent='Po odeslání se vám ozveme a pošleme přístup do aplikace.'; }
+ // Google: straight to the app's sign-in with Google; the app then asks for office, phone and plan.
+ const APP = API.replace(/\/api\/public\/signup$/,'');
+ document.getElementById('gReg').addEventListener('click',e=>{e.preventDefault();
+  const local=/^(127\.0\.0\.1|localhost)$/.test(location.hostname) && localStorage.getItem('aresApp');
+  location.href=(local||APP)+'/auth/login?connection=google-oauth2&screen_hint=signup&returnTo=%2Fapp%2Fonboarding';});
+ const f=document.getElementById('registr'), err=document.getElementById('regErr'), plans=document.getElementById('plans'), note=document.getElementById('planNote');
+ const $=id=>document.getElementById(id);
+ f.addEventListener('submit',e=>{e.preventDefault(); const miss=[...f.querySelectorAll('input[required]:not([type=checkbox])')].filter(i=>!i.value.trim()); const mail=$('re'), tel=$('rt');
+  let msg='', bad=null; if(miss.length){msg='Vyplňte prosím všechna pole.'; bad=miss[0];} else if(!mail.checkValidity()){msg='Zkontrolujte prosím e-mail.'; bad=mail;} else if(tel.value.replace(/\D/g,'').length<9){msg='Zkontrolujte prosím telefon.'; bad=tel;} else if(!$('rc').checked){msg='Potvrďte prosím souhlas se zpracováním údajů.'; bad=$('rc');}
+  if(msg){err.textContent=msg; err.hidden=false; bad.focus(); return;}
+  err.hidden=true; f.hidden=true; plans.hidden=false; plans.scrollIntoView({block:'nearest'}); plans.querySelector('.plan').focus();});
+ let sending=false;
+ const send=async (plan,label)=>{ if(sending) return; sending=true;
+  const btns=plans.querySelectorAll('button'); btns.forEach(b=>b.disabled=true);
+  note.textContent='Odesíláme registraci…'; note.hidden=false;
+  const body={name:$('rn').value.trim(), company:$('rk').value.trim(), email:$('re').value.trim(), phone:$('rt').value.trim(), plan, consent:true, website:$('rw').value};
+  if (MAIL_MODE) {
+   if (body.website) { note.textContent='Děkujeme.'; return; }
+   const text=`Dobrý den,\n\nmám zájem o AI Bot Ares.\n\nJméno: ${body.name}\nRealitní kancelář: ${body.company}\nE-mail: ${body.email}\nTelefon: ${body.phone}\nTarif: ${label}\nSouhlas se zpracováním údajů: ano\n`;
+   location.href='mailto:patrikkos46@gmail.com?subject='+encodeURIComponent('Registrace AI Bot Ares – '+body.company)+'&body='+encodeURIComponent(text);
+   note.textContent='Otevřeli jsme vám e-mail s vyplněnými údaji. Stačí ho odeslat a ozveme se vám.';
+   sending=false; btns.forEach(b=>b.disabled=false); return;
+  }
+  try{
+   const local=/^(127\.0\.0\.1|localhost)$/.test(location.hostname) && localStorage.getItem('aresApi'); // local testing only
+   const r=await fetch(local||API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+   if(r.ok){ note.textContent=`Hotovo, registrace dorazila (${label}). Ozveme se vám na ${body.email} s odkazem pro nastavení hesla.`; plans.querySelector('.plan-grid').hidden=true; $('skipPay').hidden=true; return; }
+   note.textContent = r.status===429 ? 'Moc pokusů za sebou. Zkuste to prosím za pár minut.' : r.status===400 ? 'Některý údaj nesedí. Vraťte se prosím a zkontrolujte ho.' : 'Registraci se teď nepodařilo odeslat. Zkuste to prosím znovu.';
+  }catch(_){ note.textContent='Registraci se teď nepodařilo odeslat. Zkontrolujte připojení a zkuste to znovu.'; }
+  sending=false; btns.forEach(b=>b.disabled=false);
+ };
+ plans.querySelectorAll('.plan').forEach(b=>b.addEventListener('click',()=>{plans.querySelectorAll('.plan').forEach(x=>x.classList.toggle('sel',x===b)); send(b.dataset.p.toUpperCase(), `tarif ${b.dataset.p}`);}));
+ $('skipPay').addEventListener('click',()=>send('LATER','předplatné vyberete později'));
+})();
+</script>
+<script>
+// Text dissolve on scroll: words leaving the top of the screen scramble into code and vanish letter by letter;
+// scrolling back rebuilds them. Images, forms and buttons stay untouched.
+(function(){
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const GL='01<>/{}[]#$%&*+=?;:ABCDEFHKMNRSTXZ';
+ const SKIP='form,button,.btn,.plan,.ba,.rooms,.chips,.stage,nav,.fight,.core,.meter,.nums';
+ const targets=[...document.querySelectorAll('.hero .wrap h1,.hero .wrap p,section h2,section h3,section p,section li,section .eyebrow,.src,.honest')].filter(el=>!el.closest(SKIP));
+ const items=[];
+ targets.forEach(el=>{
+  if(el.dataset.split) return; el.dataset.split=1;
+  const chars=[];
+  const walk=node=>{
+   [...node.childNodes].forEach(n=>{
+    if(n.nodeType===3){
+     const frag=document.createDocumentFragment();
+     n.textContent.split(/(\s+)/).forEach(part=>{
+      if(!part) return;
+      if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return;}
+      const w=document.createElement('span'); w.className='cw';
+      for(const c of part){const sp=document.createElement('span'); sp.className='ch'; sp.textContent=c; w.appendChild(sp); chars.push({sp,t:Math.random()});}
+      frag.appendChild(w);
+     });
+     n.replaceWith(frag);
+    } else if(n.nodeType===1 && !n.matches('img,svg,input,br')) walk(n);
+   });
+  };
+  walk(el);
+  if(chars.length) items.push({el,chars,p:-1});
+ });
+ let last=0;
+ function frame(now){
+  const H=innerHeight, scramble=now-last>55; if(scramble) last=now;
+  for(const it of items){
+   const r=it.el.getBoundingClientRect(); if(r.bottom<-80||r.top>H) continue;
+   const p=scrollY<30?0:Math.max(0,Math.min(1,(H*.30-32-r.bottom)/(H*.24)));   // starts once the block's bottom edge is ~2 lines above the 30 % mark
+   if(p===0&&it.p===0&&!scramble) continue; it.p=p;
+   for(const ch of it.chars){
+    const a=ch.t*.75;                 // when this letter starts to break up
+    if(p<=a){ if(ch.sp.className!=='ch') ch.sp.className='ch'; }
+    else if(p<a+.25){ if(ch.sp.className!=='ch s') ch.sp.className='ch s'; if(scramble) ch.sp.dataset.g=GL[(Math.random()*GL.length)|0]; }
+    else if(ch.sp.className!=='ch g') ch.sp.className='ch g';
+   }
+  }
+  requestAnimationFrame(frame);
+ }
+ requestAnimationFrame(frame);
+})();
+</script>
+<script>
+// Login opens in a small window over the page (prototype: nothing is sent yet).
+(function(){const d=document.getElementById('loginD'), f=document.getElementById('loginF'), msg=document.getElementById('loginMsg');
+ document.getElementById('openLogin').addEventListener('click',()=>{msg.hidden=true; d.showModal(); document.getElementById('le').focus();});
+ document.getElementById('closeLogin').addEventListener('click',()=>d.close());
+ document.getElementById('toReg').addEventListener('click',()=>d.close());
+ d.addEventListener('click',e=>{if(e.target===d) d.close();});
+ f.addEventListener('submit',e=>{e.preventDefault(); msg.hidden=false;});})();
+</script>
+</body>
+</html>

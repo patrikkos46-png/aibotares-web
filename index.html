@@ -3,53 +3,100 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI Bot Ares · připravujeme</title>
-<meta name="description" content="AI Bot Ares: fotky z mobilu připravené k inzerci za minutu. Robotický systém pro realitní makléře. Připravujeme.">
+<title>AI Bot Ares – Bůh války proti špatným fotkám</title>
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <style>
-:root{--g:linear-gradient(135deg,#2f6bff 0%,#6a46ff 45%,#c13bff 100%);--ink:#171433;--mut:#5d5884}
+:root{--ink:#101018;--mut:#5d5b6b;--g:linear-gradient(135deg,#2f6bff 0%,#6a46ff 45%,#c13bff 100%)}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;font:16px/1.6 -apple-system,"SF Pro Text","Segoe UI",system-ui,sans-serif;color:var(--ink);
- background:radial-gradient(80% 70% at 85% 0%,#ece6ff 0%,#f7f6fd 55%),#f7f6fd;display:flex;flex-direction:column}
-header{display:flex;align-items:center;gap:10px;padding:24px 32px;font:800 20px system-ui;letter-spacing:-.01em}
+html,body{margin:0;min-height:100%;background:#f5f4ef;color:var(--ink);font:16px/1.55 -apple-system,"SF Pro Text","Segoe UI",system-ui,sans-serif}
+header{position:absolute;z-index:3;top:0;left:0;display:flex;align-items:center;gap:10px;padding:24px 34px;font:800 19px system-ui}
+header img{width:32px;height:32px}
 header em{font-style:normal;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-main{flex:1;display:grid;place-items:center;padding:24px}
-.card{max-width:720px;text-align:center}
-.mark{position:relative;width:132px;height:132px;margin:0 auto 26px;border-radius:50%;background:#0c0a24;display:grid;place-items:center;box-shadow:0 20px 60px #6a46ff40}
-.mark img{width:96px;height:96px}
-.mark i{position:absolute;inset:0;animation:spin 6s linear infinite}
-.mark i::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:#e8f6ff;box-shadow:0 0 12px #7fd3ff;transform:translateX(58px)}
-@keyframes spin{from{transform:rotate(-18deg) scaleY(.32) rotate(0)}to{transform:rotate(-18deg) scaleY(.32) rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.mark i{animation:none}}
-.tag{display:inline-block;background:#efe6ff;color:#6d2fd6;border:1px solid #d8c6ff;border-radius:999px;padding:5px 14px;font:600 13px system-ui;margin-bottom:16px}
-h1{font:800 clamp(34px,6vw,54px)/1.08 system-ui;letter-spacing:-.025em;margin:0 0 16px}
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:minmax(320px,.9fr) 1.1fr;align-items:center;overflow:hidden;background:radial-gradient(45% 55% at 72% 52%,#e4defc 0%,#f5f4ef 72%)}
+.copy{position:relative;z-index:2;padding:0 0 0 clamp(24px,7vw,120px);max-width:640px}
+.tag{display:inline-block;border:1px solid #5236ff55;background:#ebe7ff;color:#4a2fe0;border-radius:999px;padding:5px 13px;font:600 12.5px system-ui;letter-spacing:.06em;margin-bottom:18px}
+h1{margin:0 0 16px;font:800 clamp(36px,5.4vw,70px)/1.03 system-ui;letter-spacing:-.03em}
 h1 span{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-p.lead{color:var(--mut);font-size:19px;margin:0 auto 28px;max-width:560px}
-ul{list-style:none;padding:0;margin:0 auto 34px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-li{background:#fff;border:1px solid #e7e4f6;border-radius:12px;padding:10px 16px;font-size:15px;box-shadow:0 6px 20px #2b1d7a0d}
-li b{color:#6a46ff;margin-right:6px}
-.cta{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:#fff;text-decoration:none;font:700 16px system-ui;border-radius:12px;padding:14px 24px;box-shadow:0 10px 30px #6a46ff55}
-.small{color:var(--mut);font-size:13px;margin-top:14px}
-footer{text-align:center;color:#8f8ab3;font-size:13px;padding:22px}
+.copy p{margin:0 0 26px;color:var(--mut);font-size:18px}
+.cta{display:inline-flex;gap:8px;align-items:center;background:var(--g);color:#fff;text-decoration:none;font:700 16px system-ui;border-radius:12px;padding:14px 24px;box-shadow:0 10px 30px #6a46ff55}
+.cta:hover{transform:translateY(-1px)}
+small{display:block;margin-top:14px;color:#5d5b6b;font-size:13px}
+.scene{position:absolute;right:2vw;top:50%;transform:translateY(-50%);height:min(92vh,58vw);aspect-ratio:1;z-index:1}
+.scene>img{width:100%;height:100%;display:block}
+.bits{position:absolute;inset:0;pointer-events:none}
+.bit{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);opacity:0;border-radius:1px;background:var(--c);animation:build var(--t) cubic-bezier(.3,.6,.3,1) var(--d) infinite}
+.bit.ph{width:calc(var(--s)*1.35);border-radius:2px;border:1.5px solid #fff;background:var(--img) center/cover;box-shadow:0 3px 8px #10101826;will-change:transform,opacity}
+@keyframes build{
+ 0%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--r0)) scale(.7)}
+ 18%{opacity:1}
+ 70%{opacity:1}
+ 100%{opacity:0;transform:translate(0,0) rotate(var(--r1)) scale(1)}}
+@media (prefers-reduced-motion:reduce){.bit{display:none}}
+@media (max-width:820px){
+ .hero{grid-template-columns:1fr;align-items:end;min-height:100svh}
+ .scene{right:0;left:0;margin:auto;top:70px;transform:none;height:auto;width:min(100%,52svh)}
+ .copy{padding:0 24px 32px;margin-top:62svh}
+ .copy p{font-size:16px}
+}
+.arena{position:relative;height:100vh;background:#05040d;overflow:hidden}
+.arena iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.over{position:absolute;z-index:2;left:clamp(24px,7vw,120px);bottom:9vh;max-width:min(520px,80vw);pointer-events:none}
+.over .cta{pointer-events:auto}
+.over h2{margin:0 0 12px;font:800 clamp(28px,4vw,52px)/1.05 system-ui;letter-spacing:-.03em}
+.over h2 span{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.over p{margin:0 0 22px;color:var(--mut);font-size:17px}
+button.cta{border:0;cursor:pointer}
+html{scroll-behavior:smooth}
+.copy p.kick{margin:0 0 12px;width:fit-content;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent;font:700 clamp(19px,1.7vw,24px)/1.3 system-ui;letter-spacing:-.01em}
+
+/* arc-reactor style engine on Ares's chest with the logo as its core */
+.core{position:absolute;left:var(--cx);top:var(--cy);width:var(--cw);aspect-ratio:1;transform:translate(-50%,-50%);pointer-events:none;z-index:2;border-radius:50%}
+.core .rim{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffff 0%,#f6f7fb 45%,#dfe2ea 75%,#c7cbd6 100%);box-shadow:0 2px 6px #0004,inset 0 -2px 4px #0000001f,inset 0 2px 3px #fff}
+.core .coil{position:absolute;inset:6%;border-radius:50%;background:repeating-conic-gradient(#b9a4ff 0 7deg,#ffffff00 7deg 15deg);-webkit-mask:radial-gradient(circle,transparent 58%,#000 60%);mask:radial-gradient(circle,transparent 58%,#000 60%);animation:coilSpin 12s linear infinite;box-shadow:0 0 6px #b9a4ff88}
+.core .well{position:absolute;inset:25%;border-radius:50%;background:radial-gradient(circle,#ffffff 0%,#f3eeff 35%,#cdbfff 65%,#a58bff 100%);box-shadow:inset 0 0 4px #6a46ff55,0 0 8px #b9a4ffaa;animation:wellPulse 1.8s ease-in-out infinite}
+.core img{position:absolute;inset:30%;width:40%;height:40%;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #b9a4ffaa);animation:logoPulse 1.8s ease-in-out infinite}
+.core::before{content:"";position:absolute;inset:-45%;border-radius:50%;background:radial-gradient(circle,#c9b8ff77 0%,#a58bff22 38%,transparent 66%);animation:coreGlow 1.8s ease-in-out infinite;z-index:-1}
+.core::after{content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid #cbbcff;opacity:0;animation:coreRing 1.8s ease-out infinite}
+@keyframes coilSpin{to{transform:rotate(360deg)}}
+@keyframes wellPulse{0%,100%{filter:brightness(.97)}50%{filter:brightness(1.12)}}
+@keyframes logoPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes coreGlow{0%,100%{opacity:.5;transform:scale(.85)}50%{opacity:1;transform:scale(1.12)}}
+@keyframes coreRing{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(1.8)}}
+@media (prefers-reduced-motion:reduce){.core *,.core::before,.core::after{animation:none!important}}
 </style>
 </head>
 <body>
-<header><img src="logo.svg" width="34" height="34" alt="">AI Bot <em>Ares</em></header>
-<main>
- <div class="card">
-  <div class="mark" aria-hidden="true"><img src="logo.svg" alt=""><i></i></div>
-  <span class="tag">✦ Připravujeme spuštění</span>
-  <h1>Fotky z mobilu připravené k&nbsp;inzerci.<br><span>Za minutu.</span></h1>
-  <p class="lead">AI Bot Ares je robotický systém pro realitní makléře. Projde fotky zakázky, najde tmavé, šedé a neostré záběry a roboti je opraví. Bez fotografa, bez Photoshopu.</p>
-  <ul>
-   <li><b>✓</b>Světlo a barvy jako od fotografa</li>
-   <li><b>✓</b>Celá zakázka najednou</li>
-   <li><b>✓</b>Před / Po u každé fotky</li>
-  </ul>
-  <a class="cta" href="mailto:patrikkos46@gmail.com?subject=AI%20Bot%20Ares%20%E2%80%93%20uk%C3%A1zka">Chci ukázku →</a>
-  <div class="small">Ozveme se a ukážeme Arese na vašich fotkách.</div>
+<header><img src="logo.svg" alt="">AI Bot <em>Ares</em></header>
+<section class="hero">
+ <div class="scene"><img src="ares-light.webp" alt="Ares – půl antický válečník, půl AI kyborg"><div class="bits" id="bits" aria-hidden="true"></div><span class="core" style="--cx:50%;--cy:41%;--cw:7.7%" aria-hidden="true"><i class="coil"></i><img src="logo.svg" alt=""></span></div>
+ <div class="copy">
+  <h1>Každá špatná fotka <span>padne.</span></h1>
+  <p class="kick">Získejte náskok. Ovládněte realitní trh.</p>
+  <p>AI Bot Ares spojuje umělou inteligenci a armádu autonomních robotů v jednom nástroji pro přípravu a správu realitních projektů. Během pár minut vám připraví celou zakázku k prezentaci. Od prvních fotek po hotovou nabídku. Vše na jednom místě.</p>
+  <a class="cta" id="enter" href="vstup.html">Vstoupit →</a>
  </div>
-</main>
-<footer>© 2026 AI Bot Ares · aibotares.cz</footer>
+</section>
+
+<script>
+// About 200 photo tiles (plus pixels) fly in from all sides, spin and lock into Ares: he is being built from photos.
+(function(){
+ const box=document.getElementById('bits'); if(!box) return;
+ const small=matchMedia('(max-width:820px)').matches;
+ const rnd=(a,b)=>a+Math.random()*(b-a);
+ const PH=small?110:200, PX=small?30:60, N=18;
+ const pix=['#ffffff','#d9d3ff','#9d8cff','#6f8dff','#c48a52','#8a5a32'];
+ // where pieces land: inside the figure, denser in the lower half where the body dissolves
+ const spot=()=>{const y=rnd(62,99); return [rnd(16,84),y];};   // only from the feet up to the waist
+ const frag=document.createDocumentFragment();
+ const add=(cls,x,y,s,c,extra)=>{const e=document.createElement('i');e.className='bit '+cls;
+  const ang=rnd(.15,Math.PI-.15), dist=rnd(80,220);   // start below or beside, never above the waist
+  const st={'--x':x+'%','--y':y+'%','--s':s+'px','--c':c,'--t':rnd(3.2,6.5)+'s','--d':(-rnd(0,6.5))+'s',
+   '--dx':Math.cos(ang)*dist+'px','--dy':(Math.sin(ang)*dist*.8+rnd(20,60))+'px','--r0':rnd(-200,200)+'deg','--r1':rnd(-14,14)+'deg',...extra};
+  for(const k in st) e.style.setProperty(k,st[k]); frag.appendChild(e);};
+ for(let i=0;i<PH;i++){const [x,y]=spot(); add('ph',x,y,rnd(small?10:12,small?18:24),'',{'--img':`url(t/${i%N}.jpg)`});}
+ for(let i=0;i<PX;i++){const [x,y]=spot(); add('',x,y,rnd(3,8),pix[x>50?Math.floor(rnd(0,4)):Math.floor(rnd(3,6))],{});}
+ box.appendChild(frag);
+})();
+</script>
 </body>
 </html>
