@@ -4,7 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Bot Ares · fotky k inzerci za minutu</title>
-<link rel="icon" href="logo.svg">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="description" content="Jak AI Bot Ares funguje: fotky, vizualizace, texty inzerátů, katastr a marketing na jednom místě. Registrace pro realitní makléře a kanceláře.">
+<link rel="canonical" href="https://aibotares.cz/vstup.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Bot Ares">
+<meta property="og:url" content="https://aibotares.cz/vstup.html">
+<meta property="og:title" content="AI Bot Ares – Všechny profi nástroje na jednom místě">
+<meta property="og:description" content="Fotky, vizualizace, texty a podklady k prodeji nemovitosti. Chytrá kombinace autonomních robotů a AI.">
+<meta property="og:image" content="https://aibotares.cz/og-image.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="cs_CZ">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{
   --paper:#f5f4ef; --card:#ffffff; --ink:#101018; --mut:#5d5b6b; --line:#dcdad2;
@@ -258,6 +270,8 @@ em.s{font-family:var(--sans);font-style:normal;font-weight:800;letter-spacing:-.
 .rules li{font:600 12.5px var(--sans);padding:5px 10px;border-radius:999px;background:#f4f3ef;color:var(--mut)}
 .rules li::before{content:"○ "}.rules li.ok{background:#e9f8ef;color:#167a43}.rules li.ok::before{content:"✓ "}
 [hidden]{display:none!important}
+.card-f label.consent a{color:#5a3fe0;text-decoration:underline;text-underline-offset:2px}
+footer .legal a{text-decoration:underline;text-underline-offset:2px}
 .gbtn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;margin:14px 0 4px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:700 15px var(--sans);text-decoration:none;transition:border-color .2s,box-shadow .2s}
 .gbtn:hover{border-color:#6a46ff;box-shadow:0 4px 16px #6a46ff22}.gbtn:focus-visible{outline:3px solid #6a46ff55}
 .or{display:flex;align-items:center;gap:12px;margin:14px 0 2px;color:var(--mut);font:600 12.5px var(--sans)}.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
@@ -388,7 +402,7 @@ nav .btn.o{min-height:44px;padding:0 18px;border-color:#d9d2ff;background:#fff}
   <label for="le">E-mail</label><input id="le" type="email" autocomplete="username" placeholder="vy@realitka.cz" required>
   <label for="lp">Heslo</label><input id="lp" type="password" autocomplete="current-password" required>
   <button class="btn k" type="submit">Přihlásit se</button>
-  <p class="note" id="loginMsg" role="status" hidden>Přihlášení zapojíme při spuštění aplikace. Zatím se nic neodeslalo.</p>
+  <p class="note" id="loginMsg" role="status" hidden>Aplikaci právě spouštíme. Přihlášení zpřístupníme registrovaným makléřům, ozveme se vám e-mailem.</p>
   <p class="hint" style="margin:14px 0 0;text-align:center">Nemáte účet? <a href="#registrace" id="toReg" style="color:#5a3fe0;font-weight:700">Zaregistrujte se</a></p>
  </form>
 </dialog>
@@ -501,7 +515,7 @@ nav .btn.o{min-height:44px;padding:0 18px;border-color:#d9d2ff;background:#fff}
     <div><label for="rt">Telefon</label><input id="rt" type="tel" autocomplete="tel" placeholder="+420 777 123 456" required></div>
    </div>
    <div class="hp" aria-hidden="true"><label for="rw">Web</label><input id="rw" name="website" tabindex="-1" autocomplete="off"></div>
-   <label class="consent"><input id="rc" type="checkbox" required> <span>Souhlasím se zpracováním údajů, abychom vám mohli založit účet a ozvat se.</span></label>
+   <label class="consent"><input id="rc" type="checkbox" required> <span>Souhlasím se zpracováním údajů podle <a href="zasady-ochrany-osobnich-udaju.html" target="_blank" rel="noopener">zásad ochrany osobních údajů</a>, abychom vám mohli založit účet a ozvat se, a s <a href="obchodni-podminky.html" target="_blank" rel="noopener">obchodními podmínkami</a>.</span></label>
    <p class="hint" style="margin:10px 0 0">Heslo si nastavíte bezpečně až v aplikaci, odkaz vám pošleme e-mailem.</p>
    <p class="err" id="regErr" role="alert" hidden></p>
    <button class="btn k" type="submit">Pokračovat k předplatnému →</button>
@@ -523,6 +537,7 @@ nav .btn.o{min-height:44px;padding:0 18px;border-color:#d9d2ff;background:#fff}
 <footer><div class="wrap">
  <a class="brand" href="index.html" style="color:var(--ink)"><img src="logo.svg" alt="">AI Bot Ares</a>
  <a href="mailto:patrikkos46@gmail.com">patrikkos46@gmail.com</a>
+ <span class="legal"><a href="zasady-ochrany-osobnich-udaju.html">Ochrana osobních údajů</a> · <a href="obchodni-podminky.html">Obchodní podmínky</a></span>
  <span>© 2026 aibotares.cz</span>
 </div></footer>
 
@@ -603,59 +618,18 @@ fit(); addEventListener('resize', fit);
  $('skipPay').addEventListener('click',()=>send('LATER','předplatné vyberete později'));
 })();
 </script>
+<style>@font-face{font-family:"Noto Sans Linear B";src:local("Noto Sans Linear B"),url(fonts/NotoSansLinearB-Regular.ttf) format("truetype");font-display:swap}</style>
+<!-- Přečtený text se přepíše do řečtiny (odstavce) a lineárního písma B (nadpisy). -->
+<script src="recky.js?v=11"></script>
 <script>
-// Text dissolve on scroll: words leaving the top of the screen scramble into code and vanish letter by letter;
-// scrolling back rebuilds them. Images, forms and buttons stay untouched.
-(function(){
- if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
- const GL='01<>/{}[]#$%&*+=?;:ABCDEFHKMNRSTXZ';
- const SKIP='form,button,.btn,.plan,.ba,.rooms,.chips,.stage,nav,.fight,.core,.meter,.nums';
- const targets=[...document.querySelectorAll('.hero .wrap h1,.hero .wrap p,section h2,section h3,section p,section li,section .eyebrow,.src,.honest')].filter(el=>!el.closest(SKIP));
- const items=[];
- targets.forEach(el=>{
-  if(el.dataset.split) return; el.dataset.split=1;
-  const chars=[];
-  const walk=node=>{
-   [...node.childNodes].forEach(n=>{
-    if(n.nodeType===3){
-     const frag=document.createDocumentFragment();
-     n.textContent.split(/(\s+)/).forEach(part=>{
-      if(!part) return;
-      if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return;}
-      const w=document.createElement('span'); w.className='cw';
-      for(const c of part){const sp=document.createElement('span'); sp.className='ch'; sp.textContent=c; w.appendChild(sp); chars.push({sp,t:Math.random()});}
-      frag.appendChild(w);
-     });
-     n.replaceWith(frag);
-    } else if(n.nodeType===1 && !n.matches('img,svg,input,br')) walk(n);
-   });
-  };
-  walk(el);
-  if(chars.length) items.push({el,chars,p:-1});
- });
- let last=0;
- function frame(now){
-  const H=innerHeight, scramble=now-last>55; if(scramble) last=now;
-  for(const it of items){
-   const r=it.el.getBoundingClientRect(); if(r.bottom<-80||r.top>H) continue;
-   const p=scrollY<30?0:Math.max(0,Math.min(1,(H*.30-32-r.bottom)/(H*.24)));   // starts once the block's bottom edge is ~2 lines above the 30 % mark
-   if(p===0&&it.p===0&&!scramble) continue; it.p=p;
-   for(const ch of it.chars){
-    const a=ch.t*.75;                 // when this letter starts to break up
-    if(p<=a){ if(ch.sp.className!=='ch') ch.sp.className='ch'; }
-    else if(p<a+.25){ if(ch.sp.className!=='ch s') ch.sp.className='ch s'; if(scramble) ch.sp.dataset.g=GL[(Math.random()*GL.length)|0]; }
-    else if(ch.sp.className!=='ch g') ch.sp.className='ch g';
-   }
-  }
-  requestAnimationFrame(frame);
- }
- requestAnimationFrame(frame);
-})();
-</script>
-<script>
-// Login opens in a small window over the page (prototype: nothing is sent yet).
+// Login: with the app online (or locally) go straight to the app's secure sign-in; otherwise a small window explains it is coming.
 (function(){const d=document.getElementById('loginD'), f=document.getElementById('loginF'), msg=document.getElementById('loginMsg');
- document.getElementById('openLogin').addEventListener('click',()=>{msg.hidden=true; d.showModal(); document.getElementById('le').focus();});
+ const APP_ONLINE=false, IS_LOCAL=/^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+ const APP = IS_LOCAL ? (localStorage.getItem('aresApp')||'http://localhost:3000') : 'https://app.aibotares.cz';
+ if (!APP_ONLINE && !IS_LOCAL) { f.querySelectorAll('label,input,button[type=submit]').forEach(el=>el.hidden=true); f.querySelector('.hint').textContent='Přihlášení do aplikace spouštíme.'; msg.hidden=false; }
+ document.getElementById('openLogin').addEventListener('click',()=>{
+  if (APP_ONLINE || IS_LOCAL) { location.href = APP + '/auth/login?returnTo=%2Fapp'; return; }
+  d.showModal(); document.getElementById('closeLogin').focus();});
  document.getElementById('closeLogin').addEventListener('click',()=>d.close());
  document.getElementById('toReg').addEventListener('click',()=>d.close());
  d.addEventListener('click',e=>{if(e.target===d) d.close();});
