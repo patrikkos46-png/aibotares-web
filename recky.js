@@ -9,12 +9,14 @@
  const GR={
  // Ukázky (sekce s videi)
  'Od plánku po prohlídku hotového bytu. Pár ukázek z toho, co připravíte v jedné aplikaci.':'Ἀπὸ τῆς διαγραφῆς μέχρι τῆς θέας τῆς ἑτοίμης οἰκίας. Ὀλίγα δείγματα ὧν ἐν μιᾷ τέχνῃ παρασκευάζετε.',
- 'Prohlídka zařízeného bytu s výhledem do skutečné ulice. Kupující vidí, jak se v bytě bude žít.':'Θέα τῆς κατεσκευασμένης οἰκίας πρὸς ἀληθῆ ὁδὸν βλεπούσης. Ὁ ὠνούμενος ὁρᾷ πῶς ἐν αὐτῇ βιώσεται.',
+ 'Z fotek a krátkých videí z mobilu vytvoříte unikátní videoprohlídku bytu. Kupující uvidí, jak se v něm bude žít.':'Ἐκ τῶν εἰκόνων καὶ βραχέων κινουμένων εἰκόνων μοναδικὴν περιήγησιν τῆς οἰκίας ποιεῖτε. Ὁ ὠνούμενος ὄψεται πῶς ἐν αὐτῇ βιώσεται.',
  'Z projektové dokumentace vznikne dům, který si klient prohlédne ze všech stran.':'Ἐκ τῶν τοῦ ἀρχιτέκτονος γραμμάτων γίγνεται οἰκία, ἣν ὁ πελάτης πανταχόθεν θεᾶται.',
  'Papírový plán převedeme na prostorový model, ve kterém se dá procházet.':'Τὴν ἐν χάρτῃ διαγραφὴν εἰς στερεὸν πρόπλασμα μεταβάλλομεν, δι᾽ οὗ ἔξεστι περιπατεῖν.',
- 'Půdorys nakreslíte přímo v telefonu nebo tabletu.':'Τὴν ἰχνογραφίαν αὐτοὶ γράφετε ἐν τῷ φορητῷ ἢ ἐν τῷ πινακίῳ.',
- 'Plochy místností změříme z výkresu za vás.':'Τὰ ἐμβαδὰ τῶν δωματίων ἐκ τῆς διαγραφῆς ὑμῖν μετροῦμεν.',
- 'Nábytek vyzkoušíte v místnosti přímo v mobilu.':'Τὰ σκεύη ἐν τῷ δωματίῳ πειρᾶσθε αὐτόθεν ἐν τῷ φορητῷ.',
+ 'Díky našim robotům se ve výkresech snadno vyznáte a pochopíte, co v nich je.':'Διὰ τῶν ἡμετέρων αὐτομάτων ῥᾳδίως τὰς διαγραφὰς γιγνώσκετε καὶ συνίετε τί ἐν αὐταῖς ἔνεστιν.',
+ 'Před zveřejněním zakázky spočítáme z výkresu přesné metry každé místnosti.':'Πρὸ τοῦ δημοσιεύειν τὸ ἔργον ἐκ τῆς διαγραφῆς ἀκριβῶς μετροῦμεν ἕκαστον δωμάτιον.',
+ 'Přestaňte se zbytečně trápit. Aplikace je napojená na skutečné obchody, takže vybavení z vizualizace si klient může opravdu koupit.':'Παύσασθε μάτην πονοῦντες. Ἡ τέχνη ἀληθινοῖς ἐμπορίοις συνῆπται, ὥστε τὰ σκεύη τῆς εἰκόνος ὁ πελάτης ὄντως ὠνεῖσθαι δύναται.',
+ 'Budete vědět, co skutečně prodáváte a jestli na vás nečekají nástrahy, třeba věcná břemena nebo zástavy.':'Εἴσεσθε τί ὄντως πωλεῖτε καὶ εἰ μή τινες ἐνέδραι ὑμᾶς περιμένουσιν, οἷον δουλεῖαι ἢ ὑποθῆκαι.',
+ 'Chcete vědět, co se na pozemku dá reálně postavit? Zeptejte se našeho bota Arese.':'Βούλεσθε εἰδέναι τί ἐπὶ τοῦ χωρίου ὄντως οἰκοδομεῖν ἔξεστιν; Ἐρωτᾶτε τὸν ἡμέτερον Ἄρη.',
  'Pozemek, dům i okolí z výšky dronu.':'Χωρίον, οἰκία καὶ τὰ πέριξ ἐξ ὕψους, ὥσπερ ὄρνις ὁρᾷ.',
  'Některé záběry jsou ilustrační.':'Ἔνιαι τῶν εἰκόνων παραδείγματος χάριν εἰσίν.',
  'Velitel vaší zakázky.':'Στρατηγὸς τοῦ ὑμετέρου ἔργου.',
