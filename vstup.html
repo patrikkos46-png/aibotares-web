@@ -384,13 +384,32 @@ nav .btn.o{min-height:44px;padding:0 18px;border-color:#d9d2ff;background:#fff}
 .who-many h3{font-size:clamp(22px,2.2vw,30px)}
 @media (min-width:1500px){.who-many{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:640px){.who-many{grid-template-columns:1fr}}
+
+/* Ukázky: krátké smyčky videí, hrají jen když jsou vidět */
+.ux-sub{max-width:52ch;color:var(--mut);font-size:clamp(16px,1.4vw,19px);margin:18px 0 0}
+.ux{display:grid;gap:clamp(14px,1.6vw,22px);margin-top:clamp(34px,4vw,54px)}
+.ux-top{grid-template-columns:1fr}
+.ux-bot{grid-template-columns:repeat(3,1fr);margin-top:clamp(14px,1.6vw,22px)}
+.ux figure{margin:0;min-width:0}
+.ux .m{position:relative;border-radius:22px;overflow:hidden;background:#15141f;box-shadow:0 30px 60px -34px #10101866}
+.ux video{display:block;width:100%;height:100%;object-fit:cover}
+.ux-data{grid-template-columns:1fr 1fr;margin-top:clamp(14px,1.6vw,22px)}
+.ux-data .m{aspect-ratio:1/1}.ux img{display:block;width:100%;height:100%;object-fit:cover}.ux .m.fit{background:#fff}.ux .m.fit img{object-fit:contain}
+.ux-top .m{aspect-ratio:16/9}.ux-bot .m{aspect-ratio:1/1}
+.ux .m::after{content:attr(data-n);position:absolute;left:12px;top:12px;padding:3px 9px;border-radius:999px;background:#ffffffe0;font:700 11.5px var(--sans);letter-spacing:.06em;color:var(--ink)}
+.ux figcaption{padding:12px 2px 0}
+.ux h3{margin:0;font:700 clamp(16px,1.25vw,19px)/1.25 var(--sans);letter-spacing:-.01em}
+.ux p{margin:4px 0 0;color:var(--mut);font-size:14.5px;line-height:1.45}
+.ux-top .big h3{font-size:clamp(19px,1.6vw,24px)}
+.ux-note{margin:20px 0 0;color:var(--mut);font-size:13px}
+@media (max-width:640px){.ux-bot{grid-template-columns:1fr 1fr}.ux-top .m{aspect-ratio:16/10}}
 </style>
 </head>
 <body>
 
 <nav aria-label="Hlavní">
  <a class="brand" href="index.html"><img src="logo.svg" alt="">AI Bot Ares</a>
- <a class="l" href="#ares1">Jak to funguje</a><a class="l" href="#funkce">Funkce</a><a class="l" href="#pro-koho">Pro koho</a>
+ <a class="l" href="#ares1">Jak to funguje</a><a class="l" href="#funkce">Funkce</a><a class="l" href="#ukazky">Ukázky</a><a class="l" href="#pro-koho">Pro koho</a>
  <button class="btn o" type="button" id="openLogin">Přihlásit se</button>
  <a class="btn k" href="#registrace">Registrace</a>
 </nav>
@@ -476,6 +495,28 @@ nav .btn.o{min-height:44px;padding:0 18px;border-color:#d9d2ff;background:#fff}
  </div>
  <div class="fcta rv"><p><b>Ares, váš pomocník v aplikaci.</b> Zeptáte se, poradí, kde co najdete a jaký je další krok.</p><a class="btn o" href="#registrace">Chci to vyzkoušet <span class="ar">→</span></a></div>
  <p class="honest">Každá fotka z Arese nese neviditelný podpis AIBOTARES. Naše čtečka z něj pozná, jestli a jak byla fotka upravená.</p>
+</div></section>
+
+<section id="ukazky" style="padding-top:0"><div class="wrap">
+ <span class="eyebrow rv"><i></i>Ukázky</span>
+ <h2 class="rv">Podívejte se, co Ares <em class="s">umí.</em></h2>
+ <p class="ux-sub rv">Od plánku po prohlídku hotového bytu. Pár ukázek z toho, co připravíte v jedné aplikaci.</p>
+ <div class="ux ux-top rv">
+  <figure class="big"><div class="m" data-n="Vizualizace"><video src="ukazky/vizualizace.mp4" poster="ukazky/vizualizace.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Vizualizace v české lokalitě</h3><p>Prohlídka zařízeného bytu s výhledem do skutečné ulice. Kupující vidí, jak se v bytě bude žít.</p></figcaption></figure>
+ </div>
+ <div class="ux ux-bot rv">
+  <figure><div class="m" data-n="3D"><video src="ukazky/vykres-dum.mp4" poster="ukazky/vykres-dum.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Z výkresu dům</h3><p>Z projektové dokumentace vznikne dům, který si klient prohlédne ze všech stran.</p></figcaption></figure>
+  <figure><div class="m" data-n="Plán"><video src="ukazky/plan-3d.mp4" poster="ukazky/plan-3d.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Plán na 3D model</h3><p>Papírový plán převedeme na prostorový model, ve kterém se dá procházet.</p></figcaption></figure>
+  <figure><div class="m" data-n="Plánky"><video src="ukazky/planky.mp4" poster="ukazky/planky.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Plánky z mobilu</h3><p>Půdorys nakreslíte přímo v telefonu nebo tabletu.</p></figcaption></figure>
+  <figure><div class="m" data-n="Výpočet"><video src="ukazky/pudorys.mp4" poster="ukazky/pudorys.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Půdorys spočítáme</h3><p>Plochy místností změříme z výkresu za vás.</p></figcaption></figure>
+  <figure><div class="m" data-n="Vybavení"><video src="ukazky/nabytek.mp4" poster="ukazky/nabytek.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Vybavení bez generování</h3><p>Nábytek vyzkoušíte v místnosti přímo v mobilu.</p></figcaption></figure>
+  <figure><div class="m" data-n="Dron"><video src="ukazky/dron.mp4" poster="ukazky/dron.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div><figcaption><h3>Letecké záběry</h3><p>Pozemek, dům i okolí z výšky dronu.</p></figcaption></figure>
+ </div>
+ <div class="ux ux-data rv">
+  <figure><div class="m" data-n="Katastr"><img src="ukazky/katastr.jpg" alt="Katastrální mapa s hranicemi parcel" loading="lazy" width="900" height="900"></div><figcaption><h3>Katastr</h3><p>Údaje k parcele na jednom místě.</p></figcaption></figure>
+  <figure><div class="m fit" data-n="Územní plán"><img src="ukazky/uzemni-plan.jpg" alt="Územní plán města s barevně odlišeným využitím ploch" loading="lazy" width="447" height="447"></div><figcaption><h3>Územní plán</h3><p>Co lze na pozemku postavit a podle jakých pravidel.</p></figcaption></figure>
+ </div>
+ <p class="ux-note">Některé záběry jsou ilustrační.</p>
 </div></section>
 
 <section id="pro-koho" style="padding-top:0"><div class="wrap">
@@ -620,7 +661,7 @@ fit(); addEventListener('resize', fit);
 </script>
 <style>@font-face{font-family:"Noto Sans Linear B";src:local("Noto Sans Linear B"),url(fonts/NotoSansLinearB-Regular.ttf) format("truetype");font-display:swap}</style>
 <!-- Přečtený text se přepíše do řečtiny (odstavce) a lineárního písma B (nadpisy). -->
-<script src="recky.js?v=11"></script>
+<script src="recky.js?v=12"></script>
 <script>
 // Login: with the app online (or locally) go straight to the app's secure sign-in; otherwise a small window explains it is coming.
 (function(){const d=document.getElementById('loginD'), f=document.getElementById('loginF'), msg=document.getElementById('loginMsg');
@@ -634,6 +675,18 @@ fit(); addEventListener('resize', fit);
  document.getElementById('toReg').addEventListener('click',()=>d.close());
  d.addEventListener('click',e=>{if(e.target===d) d.close();});
  f.addEventListener('submit',e=>{e.preventDefault(); msg.hidden=false;});})();
+</script>
+<script>
+// Ukázky: video hraje jen ve chvíli, kdy je na obrazovce (šetří data i baterii).
+(function(){
+ const vs=[...document.querySelectorAll('#ukazky video')]; if(!vs.length) return;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){vs.forEach(v=>v.preload='metadata');return;}
+ function check(){const H=innerHeight;
+  for(const v of vs){const r=v.getBoundingClientRect(), on=r.bottom>-120&&r.top<H+120&&r.width>0;
+   if(on&&v.paused&&!document.hidden){const p=v.play();if(p)p.catch(()=>{});} else if(!on&&!v.paused) v.pause();}}
+ addEventListener('scroll',check,{passive:true}); addEventListener('resize',check); document.addEventListener('visibilitychange',check);
+ setInterval(check,400); check();
+})();
 </script>
 </body>
 </html>

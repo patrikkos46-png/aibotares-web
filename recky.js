@@ -7,6 +7,16 @@
  const CALM=matchMedia('(prefers-reduced-motion: reduce)').matches;   // omezený pohyb: přepíše se bez animace
 
  const GR={
+ // Ukázky (sekce s videi)
+ 'Od plánku po prohlídku hotového bytu. Pár ukázek z toho, co připravíte v jedné aplikaci.':'Ἀπὸ τῆς διαγραφῆς μέχρι τῆς θέας τῆς ἑτοίμης οἰκίας. Ὀλίγα δείγματα ὧν ἐν μιᾷ τέχνῃ παρασκευάζετε.',
+ 'Prohlídka zařízeného bytu s výhledem do skutečné ulice. Kupující vidí, jak se v bytě bude žít.':'Θέα τῆς κατεσκευασμένης οἰκίας πρὸς ἀληθῆ ὁδὸν βλεπούσης. Ὁ ὠνούμενος ὁρᾷ πῶς ἐν αὐτῇ βιώσεται.',
+ 'Z projektové dokumentace vznikne dům, který si klient prohlédne ze všech stran.':'Ἐκ τῶν τοῦ ἀρχιτέκτονος γραμμάτων γίγνεται οἰκία, ἣν ὁ πελάτης πανταχόθεν θεᾶται.',
+ 'Papírový plán převedeme na prostorový model, ve kterém se dá procházet.':'Τὴν ἐν χάρτῃ διαγραφὴν εἰς στερεὸν πρόπλασμα μεταβάλλομεν, δι᾽ οὗ ἔξεστι περιπατεῖν.',
+ 'Půdorys nakreslíte přímo v telefonu nebo tabletu.':'Τὴν ἰχνογραφίαν αὐτοὶ γράφετε ἐν τῷ φορητῷ ἢ ἐν τῷ πινακίῳ.',
+ 'Plochy místností změříme z výkresu za vás.':'Τὰ ἐμβαδὰ τῶν δωματίων ἐκ τῆς διαγραφῆς ὑμῖν μετροῦμεν.',
+ 'Nábytek vyzkoušíte v místnosti přímo v mobilu.':'Τὰ σκεύη ἐν τῷ δωματίῳ πειρᾶσθε αὐτόθεν ἐν τῷ φορητῷ.',
+ 'Pozemek, dům i okolí z výšky dronu.':'Χωρίον, οἰκία καὶ τὰ πέριξ ἐξ ὕψους, ὥσπερ ὄρνις ὁρᾷ.',
+ 'Některé záběry jsou ilustrační.':'Ἔνιαι τῶν εἰκόνων παραδείγματος χάριν εἰσίν.',
  'Velitel vaší zakázky.':'Στρατηγὸς τοῦ ὑμετέρου ἔργου.',
  'Ares řídí armádu robotů a každý z nich umí jednu věc dokonale. Jeden rozsvítí tmavý pokoj, druhý srovná křivý záběr, třetí vyčistí bílé stěny, další připraví text inzerátu. Vy nahrajete fotky z mobilu, Ares rozdělí práci a hlídá výsledek.':'Ἄρης ἡγεῖται στρατοῦ αὐτομάτων, ὧν ἕκαστον ἓν ἄριστα ἐπίσταται. Τὸ μὲν φωτίζει τὸ σκοτεινὸν δωμάτιον, τὸ δὲ ὀρθοῖ τὴν σκολιὰν ὄψιν, τὸ δὲ τρίτον καθαίρει τοὺς λευκοὺς τοίχους, ἄλλο δὲ γράφει τὸ κήρυγμα. Ὑμεῖς μὲν τὰς εἰκόνας πέμπετε, Ἄρης δὲ διανέμει τὰ ἔργα καὶ φυλάττει τὸ τέλος.',
  'Za pár minut máte celou zakázku připravenou k prezentaci. Bez fotografa, bez Photoshopu a bez dlouhého čekání.':'Ἐν ὀλίγῳ χρόνῳ ὅλον τὸ ἔργον ἕτοιμον ἔχετε πρὸς ἐπίδειξιν, ἄνευ ζωγράφου, ἄνευ ἀλλοτρίας τέχνης, ἄνευ μακρᾶς ἀναμονῆς.',
