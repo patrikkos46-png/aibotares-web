@@ -7,6 +7,20 @@
  const CALM=matchMedia('(prefers-reduced-motion: reduce)').matches;   // omezený pohyb: přepíše se bez animace
 
  const GR={
+ // Nové funkce (2026-11-19)
+ 'Texty pro Sreality, Facebook, Instagram a LinkedIn':'Λόγοι διὰ Sreality, Facebook, Instagram καὶ LinkedIn',
+ 'Každá platforma podle svých pravidel, s hashtagy a náhledem příspěvku.':'Ἑκάστη ἀγορὰ κατὰ τοὺς ἑαυτῆς νόμους, μετὰ σημείων καὶ προόψεως τοῦ γράμματος.',
+ 'Šablony a vzory kanceláře':'Τύποι καὶ παραδείγματα τοῦ ἐργαστηρίου',
+ 'Texty ve vašem stylu, bez nutnosti AI. Ares je umí jen doladit.':'Λόγοι κατὰ τὸν ὑμέτερον τρόπον, ἄνευ μηχανικῆς διανοίας. Ὁ Ἄρης μόνον ἐπιδιορθοῖ.',
+ 'Akcelerátor textů':'Ὁ ἐπιταχυντὴς τῶν λόγων',
+ 'Ohodnotí varianty, vybere nejlepší a pohlídá povinné údaje i energetickou třídu.':'Κρίνει τὰς ἐκδόσεις, τὴν βελτίστην αἱρεῖται καὶ φυλάσσει τὰ ἀναγκαῖα καὶ τὴν τάξιν τῆς ἐνεργείας.',
+ 'Parcela z odkazu nebo výpisu LV, mapa, budova a kontrola zátěží.':'Τὸ χωρίον ἐκ συνδέσμου ἢ ἀποσπάσματος, χάρτης, οἰκοδομὴ καὶ ἔλεγχος τῶν βαρῶν.',
+ 'Stavební rádce':'Ὁ σύμβουλος τῆς οἰκοδομῆς',
+ 'Co se na pozemku dá postavit podle stavebního zákona a územního plánu obce.':'Τί ἔξεστιν οἰκοδομεῖν ἐπὶ τοῦ χωρίου κατὰ τὸν νόμον καὶ τὴν διάταξιν τῆς πόλεως.',
+ 'Slovníček pojmů':'Λεξικὸν τῶν ὅρων',
+ 'Úřední pojmy z katastru vysvětlené lidsky, se zdrojem.':'Οἱ ὅροι τοῦ κτηματολογίου ἁπλῶς ἡρμηνευμένοι, μετὰ τῆς πηγῆς.',
+ 'Zpráva pro klienta':'Ἀγγελία τῷ πελάτῃ',
+ 'Přehledná infografika v PDF, kterou klient otevře i bez přihlášení.':'Σαφὴς εἰκονογραφία, ἣν ὁ πελάτης καὶ ἄνευ εἰσόδου ἀνοίγει.',
  // Ukázky (sekce s videi)
  'Od plánku po prohlídku hotového bytu. Pár ukázek z toho, co připravíte v jedné aplikaci.':'Ἀπὸ τῆς διαγραφῆς μέχρι τῆς θέας τῆς ἑτοίμης οἰκίας. Ὀλίγα δείγματα ὧν ἐν μιᾷ τέχνῃ παρασκευάζετε.',
  'Z fotek a krátkých videí z mobilu vytvoříte unikátní videoprohlídku bytu. Kupující uvidí, jak se v něm bude žít.':'Ἐκ τῶν εἰκόνων καὶ βραχέων κινουμένων εἰκόνων μοναδικὴν περιήγησιν τῆς οἰκίας ποιεῖτε. Ὁ ὠνούμενος ὄψεται πῶς ἐν αὐτῇ βιώσεται.',
